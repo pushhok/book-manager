@@ -15,12 +15,14 @@
           {{ star <= book.rating ? '★' : '☆' }}
         </span>
       </div>
+      
       <button
         @click="$emit('toggle')"
         :class="['btn', book.completed ? 'btn-secondary' : 'btn-primary']"
       >
         {{ book.completed ? 'Прочитано' : 'Отметить прочитанной' }}
       </button>
+
       <button @click="$emit('delete')" class="btn btn-danger">
         ✕
       </button>
@@ -30,6 +32,7 @@
 
 <script setup>
 defineProps(['book'])
+
 defineEmits(['toggle', 'delete', 'rate'])
 </script>
 
@@ -87,47 +90,4 @@ defineEmits(['toggle', 'delete', 'rate'])
 .rating span {
   font-size: 20px;
   cursor: pointer;
-  color: gold;
-}
-
-.rating span:hover {
-  transform: scale(1.2);
-}
-
-.btn {
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9em;
-  transition: background 0.3s;
-}
-
-.btn-primary {
-  background: #4CAF50;
-  color: white;
-}
-
-.btn-primary:hover {
-  background: #45a049;
-}
-
-.btn-secondary {
-  background: #2196F3;
-  color: white;
-}
-
-.btn-secondary:hover {
-  background: #1e87db;
-}
-
-.btn-danger {
-  background: #f44336;
-  color: white;
-  padding: 8px 12px;
-}
-
-.btn-danger:hover {
-  background: #da190b;
-}
-</style>
+  color:
