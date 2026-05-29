@@ -2,20 +2,10 @@
   <form @submit.prevent="handleSubmit" class="add-form">
     <h2>Добавить новую книгу</h2>
     <div class="form-group">
-      <input
-        v-model="formData.title"
-        type="text"
-        placeholder="Название книги"
-        required
-      />
+      <input v-model="formData.title" type="text" placeholder="Название книги" required />
     </div>
     <div class="form-group">
-      <input
-        v-model="formData.author"
-        type="text"
-        placeholder="Автор"
-        required
-      />
+      <input v-model="formData.author" type="text" placeholder="Автор" required />
     </div>
     <div class="form-group">
       <select v-model="formData.genre" required>
@@ -27,26 +17,33 @@
         <option value="Поэзия">Поэзия</option>
       </select>
     </div>
+    <div class="form-group">
+      <textarea v-model="formData.description" placeholder="Краткое описание (необязательно)" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <input v-model="formData.imageUrl" type="url" placeholder="Ссылка на обложку (URL)" />
+    </div>
     <button type="submit" class="btn-submit">Добавить книгу</button>
   </form>
 </template>
 
 <script setup>
 import { reactive } from 'vue'
-
 const emit = defineEmits(['add-book'])
-
 const formData = reactive({
   title: '',
   author: '',
-  genre: ''
+  genre: '',
+  description: '',
+  imageUrl: ''
 })
-
 const handleSubmit = () => {
   emit('add-book', { ...formData })
   formData.title = ''
   formData.author = ''
   formData.genre = ''
+  formData.description = ''
+  formData.imageUrl = ''
 }
 </script>
 
@@ -58,23 +55,22 @@ const handleSubmit = () => {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   margin-bottom: 20px;
 }
-.add-form h2 {
-  margin-bottom: 15px;
-  color: #333;
-}
-.form-group {
-  margin-bottom: 15px;
-}
+.add-form h2 { margin-bottom: 15px; color: #333; }
+.form-group { margin-bottom: 15px; }
 .form-group input,
-.form-group select {
+.form-group select,
+.form-group textarea {
   width: 100%;
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1em;
+  font-family: inherit;
+  resize: vertical;
 }
 .form-group input:focus,
-.form-group select:focus {
+.form-group select:focus,
+.form-group textarea:focus {
   outline: none;
   border-color: #4CAF50;
 }
@@ -89,7 +85,5 @@ const handleSubmit = () => {
   cursor: pointer;
   transition: background 0.3s;
 }
-.btn-submit:hover {
-  background: #45a049;
-}
+.btn-submit:hover { background: #45a049; }
 </style>
