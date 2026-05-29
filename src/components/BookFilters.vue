@@ -1,51 +1,87 @@
 <template>
-  <div class="filters">
-    <div class="search">
-      <input v-model="searchQuery" type="text" placeholder="Поиск по названию или автору..." />
-    </div>
-    <div class="controls">
-      <div class="filter-buttons">
-        <button v-for="option in filterOptions" :key="option.value" @click="$emit('update:filter', option.value)" :class="['filter-btn', { active: filter === option.value }]">
-          {{ option.label }}
-        </button>
+  <div class="card mb-4 shadow-sm">
+    <div class="card-body">
+      <div class="row g-3 align-items-center">
+        <div class="col-md-5">
+          <div class="input-group">
+            <span class="input-group-text">🔍</span>
+            <input 
+              v-model="searchQuery" 
+              type="text" 
+              class="form-control" 
+              placeholder="Поиск по названию или автору..."
+            />
+          </div>
+        </div>
+        
+        <div class="col-md-3">
+          <select v-model="sortBy" class="form-select">
+            <option value="date">По дате добавления</option>
+            <option value="title">По названию</option>
+            <option value="author">По автору</option>
+            <option value="rating">По рейтингу</option>
+          </select>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="btn-group w-100" role="group">
+            <button 
+              type="button" 
+              class="btn" 
+              :class="filter === 'all' ? 'btn-primary' : 'btn-outline-primary'"
+              @click="$emit('update:filter', 'all')"
+            >
+              Все
+            </button>
+            <button 
+              type="button" 
+              class="btn" 
+              :class="filter === 'unread' ? 'btn-primary' : 'btn-outline-primary'"
+              @click="$emit('update:filter', 'unread')"
+            >
+              Непрочитанные
+            </button>
+            <button 
+              type="button" 
+              class="btn" 
+              :class="filter === 'read' ? 'btn-primary' : 'btn-outline-primary'"
+              @click="$emit('update:filter', 'read')"
+            >
+              Прочитанные
+            </button>
+          </div>
+        </div>
       </div>
-      <select v-model="sortBy" class="sort-select">
-        <option value="date">Сортировка: По дате</option>
-        <option value="title">По названию</option>
-        <option value="author">По автору</option>
-        <option value="rating">По рейтингу</option>
-      </select>
-    </div>
-    <div class="stats">
-      <p>Всего: {{ total }} | Прочитано: {{ completed }} | Осталось: {{ total - completed }}</p>
+      
+      <div class="mt-3 pt-3 border-top">
+        <div class="row text-center">
+          <div class="col-4">
+            <h6 class="mb-0 text-primary">{{ total }}</h6>
+            <small class="text-muted">Всего книг</small>
+          </div>
+          <div class="col-4">
+            <h6 class="mb-0 text-success">{{ completed }}</h6>
+            <small class="text-muted">Прочитано</small>
+          </div>
+          <div class="col-4">
+            <h6 class="mb-0 text-warning">{{ total - completed }}</h6>
+            <small class="text-muted">Осталось</small>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
+
 const props = defineProps(['filter', 'books'])
 defineEmits(['update:filter'])
+
 const searchQuery = defineModel('searchQuery')
 const sortBy = defineModel('sortBy')
-const filterOptions = [
-  { value: 'all', label: 'Все' },
-  { value: 'unread', label: 'Непрочитанные' },
-  { value: 'read', label: 'Прочитанные' }
-]
+
 const total = computed(() => props.books.length)
 const completed = computed(() => props.books.filter(b => b.completed).length)
 </script>
-
-<style scoped>
-.filters { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
-.search { margin-bottom: 15px; }
-.search input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 1em; }
-.controls { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 15px; flex-wrap: wrap; }
-.filter-buttons { display: flex; gap: 10px; }
-.filter-btn { padding: 8px 16px; border: 1px solid #ddd; background: white; border-radius: 4px; cursor: pointer; transition: all 0.3s; }
-.filter-btn:hover { background: #f0f0f0; }
-.filter-btn.active { background: #4CAF50; color: white; border-color: #4CAF50; }
-.sort-select { padding: 8px 12px; border-radius: 4px; border: 1px solid #ddd; font-size: 0.9em; cursor: pointer; background: white; }
-.stats { padding-top: 15px; border-top: 1px solid #eee; color: #666; font-size: 0.9em; }
-</style>
