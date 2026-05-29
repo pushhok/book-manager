@@ -8,6 +8,8 @@
   },
   "homepage": "https://pushhok.github.io/book-manager/",
   "devDependencies": {
-    "gh-pages": "^6.3.0"
-  }
+  "vite": "^5.x.x",
+  "@vitejs/plugin-vue": "^5.x.x",
+  "vue": "^3.x.x"
+}
 }
