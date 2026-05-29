@@ -21,9 +21,7 @@
       >
         {{ book.completed ? 'Прочитано' : 'Отметить прочитанной' }}
       </button>
-      <button @click="$emit('delete')" class="btn btn-danger">
-        ✕
-      </button>
+      <button @click="$emit('delete')" class="btn btn-danger">✕</button>
     </div>
   </div>
 </template>
@@ -45,55 +43,45 @@ defineEmits(['toggle', 'delete', 'rate'])
   align-items: center;
   transition: all 0.3s;
 }
-
 .book-card.completed {
   background: #f0f7f0;
   opacity: 0.8;
 }
-
 .book-info {
   flex: 1;
 }
-
 .book-info h3 {
   margin-bottom: 4px;
   color: #333;
 }
-
 .author {
   color: #666;
   font-size: 0.9em;
   margin-bottom: 4px;
 }
-
 .genre {
   background: #e0e0e0;
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 0.8em;
 }
-
 .book-actions {
   display: flex;
   gap: 8px;
   align-items: center;
 }
-
 .rating {
   display: flex;
   gap: 2px;
 }
-
 .rating span {
   font-size: 20px;
   cursor: pointer;
   color: gold;
 }
-
 .rating span:hover {
   transform: scale(1.2);
 }
-
 .btn {
   padding: 8px 12px;
   border: none;
@@ -102,31 +90,25 @@ defineEmits(['toggle', 'delete', 'rate'])
   font-size: 0.9em;
   transition: background 0.3s;
 }
-
 .btn-primary {
   background: #4CAF50;
   color: white;
 }
-
 .btn-primary:hover {
   background: #45a049;
 }
-
 .btn-secondary {
   background: #2196F3;
   color: white;
 }
-
 .btn-secondary:hover {
   background: #1e87db;
 }
-
 .btn-danger {
   background: #f44336;
   color: white;
   padding: 8px 12px;
 }
-
 .btn-danger:hover {
   background: #da190b;
 }

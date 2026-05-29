@@ -12,7 +12,7 @@
         :books="books"
       />
       <div v-if="filteredBooks.length === 0" class="empty-state">
-        <p>Книги не найдены :(</p>
+        <p>Книги не найдены:(</p>
         <p>Добавьте первую книгу или измените параметры поиска</p>
       </div>
       <div v-else class="books-list">
@@ -36,9 +36,8 @@ import BookFilters from './components/BookFilters.vue'
 import BookCard from './components/BookCard.vue'
 
 const books = ref([])
-
 const savedBooks = localStorage.getItem('books')
-if (savedBooks) {
+if(savedBooks){
   books.value = JSON.parse(savedBooks)
 }
 
@@ -61,9 +60,9 @@ const addBook = (bookData) => {
 
 const toggleBook = (id) => {
   const book = books.value.find(b => b.id === id)
-  if (book) {
+  if(book){
     book.completed = !book.completed
-    if (!book.completed) {
+    if(!book.completed){
       book.rating = 0
     }
   }
@@ -71,13 +70,13 @@ const toggleBook = (id) => {
 
 const rateBook = (id, rating) => {
   const book = books.value.find(b => b.id === id)
-  if (book && book.completed) {
+  if(book && book.completed){
     book.rating = rating
   }
 }
 
 const deleteBook = (id) => {
-  if (confirm('Удалить книгу?')) {
+  if(confirm('Удалить книгу?')){
     books.value = books.value.filter(b => b.id !== id)
   }
 }
@@ -85,12 +84,12 @@ const deleteBook = (id) => {
 const filteredBooks = computed(() => {
   return books.value
     .filter(book => {
-      if (currentFilter.value === 'unread') return !book.completed
-      if (currentFilter.value === 'read') return book.completed
+      if(currentFilter.value === 'unread') return !book.completed
+      if(currentFilter.value === 'read') return book.completed
       return true
     })
     .filter(book => {
-      if (!searchQuery.value) return true
+      if(!searchQuery.value) return true
       const query = searchQuery.value.toLowerCase()
       return book.title.toLowerCase().includes(query) || 
              book.author.toLowerCase().includes(query)
@@ -104,19 +103,16 @@ const filteredBooks = computed(() => {
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: #f0f2f5;
   line-height: 1.6;
 }
-
 .app {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
-
 header {
   text-align: center;
   margin-bottom: 30px;
@@ -126,31 +122,26 @@ header {
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-
 header h1 {
   font-size: 2.5em;
   margin-bottom: 5px;
 }
-
 main {
   background: white;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
-
 .empty-state {
   text-align: center;
   padding: 40px;
   color: #999;
   font-size: 1.2em;
 }
-
 .empty-state p:first-child {
   font-size: 3em;
   margin-bottom: 20px;
 }
-
 .books-list {
   margin-top: 20px;
 }

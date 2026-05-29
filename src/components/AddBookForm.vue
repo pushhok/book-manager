@@ -44,7 +44,6 @@ const formData = reactive({
 
 const handleSubmit = () => {
   emit('add-book', { ...formData })
-  // Очистка формы
   formData.title = ''
   formData.author = ''
   formData.genre = ''
@@ -59,16 +58,13 @@ const handleSubmit = () => {
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   margin-bottom: 20px;
 }
-
 .add-form h2 {
   margin-bottom: 15px;
   color: #333;
 }
-
 .form-group {
   margin-bottom: 15px;
 }
-
 .form-group input,
 .form-group select {
   width: 100%;
@@ -77,13 +73,11 @@ const handleSubmit = () => {
   border-radius: 4px;
   font-size: 1em;
 }
-
 .form-group input:focus,
 .form-group select:focus {
   outline: none;
   border-color: #4CAF50;
 }
-
 .btn-submit {
   width: 100%;
   padding: 12px;
@@ -95,7 +89,6 @@ const handleSubmit = () => {
   cursor: pointer;
   transition: background 0.3s;
 }
-
 .btn-submit:hover {
   background: #45a049;
 }

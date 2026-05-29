@@ -49,11 +49,9 @@ const completed = computed(() => props.books.filter(b => b.completed).length)
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   margin-bottom: 20px;
 }
-
 .search {
   margin-bottom: 15px;
 }
-
 .search input {
   width: 100%;
   padding: 10px;
@@ -61,13 +59,11 @@ const completed = computed(() => props.books.filter(b => b.completed).length)
   border-radius: 4px;
   font-size: 1em;
 }
-
 .filter-buttons {
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
 }
-
 .filter-btn {
   padding: 8px 16px;
   border: 1px solid #ddd;
@@ -76,17 +72,14 @@ const completed = computed(() => props.books.filter(b => b.completed).length)
   cursor: pointer;
   transition: all 0.3s;
 }
-
 .filter-btn:hover {
   background: #f0f0f0;
 }
-
 .filter-btn.active {
   background: #4CAF50;
   color: white;
   border-color: #4CAF50;
 }
-
 .stats {
   padding-top: 15px;
   border-top: 1px solid #eee;
